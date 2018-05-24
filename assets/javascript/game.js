@@ -41,6 +41,7 @@ document.onkeyup = function(event) {
         guessesLeft--;
         lettersGuessed.push(Guess);
         if (guessesLeft === 0) {
+            lose();
             losses++
             newRound();
             computerChoose();
@@ -81,6 +82,12 @@ function newRound() {
 
 function win() {
     alert("You guessed it, " + Answer + "!");
+}
+
+//Lose Alert
+
+function lose() {
+    alert("Sorry you lost, the answer was " + Answer + ". Please try again!")
 }
 
 //Updating Game Stats Function
