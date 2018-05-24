@@ -12,37 +12,39 @@ window.onload = function() {
     computerChoose()
     let possibleAnswer = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
     compAnswer = possibleAnswer[Math.floor(Math.random() * possibleAnswer.length)];
-    console.log("Computer Chooses: " + compAnswer);
+    Answer = compAnswer.toUpperCase();
+    console.log("Computer Chooses: " + Answer);
 }
 
 //User Guessing
 
 document.onkeyup = function(event) {
     let userGuess = event.key;
-
-    console.log("User Guesses: " + userGuess);
+    Guess = userGuess.toUpperCase();
+    console.log("User Guesses: " + Guess);
 
     
-    if (userGuess.length !==1 || !isNaN(userGuess) || lettersGuessed.includes(userGuess)) {
+    if (Guess.length !==1 || !isNaN(Guess) || lettersGuessed.includes(Guess)) {
         return;
     }
     
-    else if (userGuess === compAnswer) {
+    else if (Guess === Answer) {
+        win();
         wins++;
         newRound();
         computerChoose();
-        console.log("Computer Chooses: " + compAnswer);
+        console.log("Computer Chooses: " + Answer);
         gameStats();
     }
 
-    else if (userGuess !== compAnswer && guessesLeft > 0) {
+    else if (Guess !== Answer && guessesLeft > 0) {
         guessesLeft--;
-        lettersGuessed.push(userGuess);
+        lettersGuessed.push(Guess);
         if (guessesLeft === 0) {
             losses++
             newRound();
             computerChoose();
-            console.log("Computer Chooses: " + compAnswer);
+            console.log("Computer Chooses: " + Answer);
         }
         gameStats();
     }
@@ -63,6 +65,7 @@ function computerChoose() {
     //Possible Letters
     let possibleAnswer = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
     compAnswer = possibleAnswer[Math.floor(Math.random() * possibleAnswer.length)];
+    Answer = compAnswer.toUpperCase();
 }
 
 //New Round Function
@@ -74,6 +77,11 @@ function newRound() {
     gameStats();
 }
 
+//Win Alert
+
+function win() {
+    alert("You guessed it, " + Answer + "!");
+}
 
 //Updating Game Stats Function
 
